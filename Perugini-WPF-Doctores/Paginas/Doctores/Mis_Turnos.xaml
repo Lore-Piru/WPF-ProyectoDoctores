@@ -1,0 +1,53 @@
+﻿<Page x:Class="Perugini_WPF_Doctores.Paginas.Doctores.Mis_Turnos"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Perugini_WPF_Doctores.Paginas.Doctores"
+      mc:Ignorable="d" 
+      d:DesignHeight="550" d:DesignWidth="900"
+      Title="Mis_Turnos">
+    
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60*"></RowDefinition>
+            <RowDefinition Height="490*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <TextBlock x:Name="Texto_Inicial" TextWrapping="Wrap" Text="Mis Turnos" FontFamily="Cooper Black" FontSize="50" TextAlignment="Center" VerticalAlignment="Center" Height="58"/>
+        <Grid Grid.Row="1" Name="Grid_Turnos">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.1*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="0.1*"></RowDefinition>
+                <RowDefinition Height="0.15*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="0.1*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <DataGrid Name="grid_turnos" Grid.Column="1" Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=1}" Background="#FFF7D4F5" RowBackground="#FFF979F2" AlternatingRowBackground="#FFF7D4F5" CanUserAddRows="False" CanUserResizeColumns="True" ColumnWidth="*"/>
+
+            <Grid Grid.Row="3" Grid.Column="1" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="0.25*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="0.25*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" x:Name="Boton_Eliminar_Turno" Content="Eliminar turno" Background="#F6A2D7" FontFamily="Cooper Black" FontSize="15" Click="Boton_Eliminar_Turno_Click" />
+                <Button Grid.Column="2" x:Name="Boton_Aceptar_Turno" Content="Aceptar turno" Background="#F6A2D7" FontFamily="Cooper Black" FontSize="15" Click="Boton_Aceptar_Turno_Click" />
+                <Button Grid.Column="4" x:Name="Boton_Rechazar_Turno" Content="Rechazar turno" Background="#F6A2D7" FontFamily="Cooper Black" FontSize="15" Click="Boton_Rechazar_Turno_Click" />
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>

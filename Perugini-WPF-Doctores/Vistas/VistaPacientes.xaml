@@ -1,0 +1,45 @@
+﻿<UserControl x:Class="Perugini_WPF_Doctores.Vistas.VistaPacientes"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Perugini_WPF_Doctores.Vistas"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="900">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="550"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid Height="50" Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                <ColumnDefinition Width="0.8*"></ColumnDefinition>
+                <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                <ColumnDefinition Width="0.8*"></ColumnDefinition>
+                <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                <ColumnDefinition Width="0.3*"></ColumnDefinition>
+                <ColumnDefinition Width="0.1*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button      Grid.Column="1" x:Name="Boton_Mis_Turnos" Content="Mis turnos" HorizontalAlignment="Center" Background="#F6A2D7" FontFamily="Cooper Black" FontSize="25" RenderTransformOrigin="1,0" Width="229" Click="Boton_Mis_Turnos_Click"/>
+            <Button      Grid.Column="3" x:Name="Boton_Mis_Recetas" Content="Mis Recetas" HorizontalAlignment="Center" Background="#F6A2D7" FontFamily="Cooper Black" FontSize="25" RenderTransformOrigin="1,0" Width="229" Click="Boton_Mis_Recetas_Click"/>
+            <Button      Grid.Column="5" x:Name="Boton_Pedir_Turno" Content="Pedir un turno" HorizontalAlignment="Center" Background="#F6A2D7" FontFamily="Cooper Black" FontSize="25" RenderTransformOrigin="1,0" Width="229" Click="Boton_Pedir_Turno_Click"/>
+            <Button      Grid.Column="7" x:Name="Boton_Volver" Content="Volver al login" HorizontalAlignment="Center" Background="#F6A2D7" FontFamily="Cooper Black" FontSize="25" RenderTransformOrigin="1,0" Width="229" Click="Boton_Volver_Click"/>
+
+            <Button      Grid.Column="9" x:Name="Boton_Editar" HorizontalAlignment="Center" Background="#F6A2D7" FontFamily="Cooper Black"          FontSize="15" RenderTransformOrigin="1,0" Width="60" Click="Boton_Editar_Click">
+                <Image Source="/Vistas/icono_editar.png"/>
+            </Button>
+        </Grid>
+        <Frame Grid.Row="1" Name="Frame_VistaPacientes" Height="550" Width="900"></Frame>
+    </Grid>
+</UserControl>
