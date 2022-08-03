@@ -45,7 +45,6 @@ Trabajé con la siguiente consigna.
 		* Los DNI deben tener 8 números.
 		* Los Pasaporte deben tener 3 letras y 6 números en ese orden.
 
-
 ## Mejoras
 
 Estos serían algunos errores y aspectos de mejora que fuí encontrando.
@@ -56,8 +55,6 @@ Estos serían algunos errores y aspectos de mejora que fuí encontrando.
 * Especialidades para los docs y para los turnos.
 * Verificar que no se pueda tener dos usuarios con mismo usuario y clave o incluso datos únicos como documento.
 * El tipo de documento se podría haber manejado mejor ya que está súper hardcodeado.
-
-* Que se verifiquen la cantidad de caracteres.
 
 ##Contacto ✉️
 
