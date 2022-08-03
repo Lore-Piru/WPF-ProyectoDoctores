@@ -6,18 +6,14 @@ using System.Data.SqlClient;
 
 namespace Perugini_WPF_Doctores.Clases
 {
-    public class Conector
+    public static class Conector
     {
-        private SqlConnection conexionSQL;
-        private string conexion;
-
-        public Conector()
-        {
-            conexion = ConfigurationManager.ConnectionStrings["BD_ProyectoDoctores"].ConnectionString;
-        }
+        private static SqlConnection conexionSQL;
+        private static string conexion = ConfigurationManager.ConnectionStrings["BD_ProyectoDoctores"].ConnectionString;
+        
 
         #region personas
-        public void nuevaPersona(List<string> datos, int tipoDeDoc, int numDeDoc, bool doc_paciente) // doc_paciente - True doc.
+        public static void nuevaPersona(List<string> datos, int tipoDeDoc, string numDeDoc, bool doc_paciente) // doc_paciente - True doc.
         {
             conexionSQL = new SqlConnection(conexion);
 
@@ -44,7 +40,7 @@ namespace Perugini_WPF_Doctores.Clases
             conexionSQL.Close();
         }
 
-        public DataTable infoPersona(int id, bool doc_paciente) // doc_paciente - True doc.
+        public static DataTable infoPersona(int id, bool doc_paciente) // doc_paciente - True doc.
         {
             conexionSQL = new SqlConnection(conexion);
 
@@ -73,8 +69,8 @@ namespace Perugini_WPF_Doctores.Clases
             return infoPersona;
         }
 
-        public void actualizarPersona(int Id, string nombre, string apellido, string nombreDeUsuario,
-                        string clave, int tipoDeDoc, int numDeDoc, bool doc_paciente) // doc_paciente - True doc.
+        public static void actualizarPersona(int Id, string nombre, string apellido, string nombreDeUsuario,
+                        string clave, int tipoDeDoc, string numDeDoc, bool doc_paciente) // doc_paciente - True doc.
         {
             conexionSQL = new SqlConnection(conexion);
 
@@ -102,7 +98,7 @@ namespace Perugini_WPF_Doctores.Clases
             conexionSQL.Close();
         }
 
-        public int login(string nombreDeUsuario, string clave, bool doc_paciente) // doc_paciente - True doc.
+        public static int login(string nombreDeUsuario, string clave, bool doc_paciente) // doc_paciente - True doc.
         {
             conexionSQL = new SqlConnection(conexion);
 
@@ -133,7 +129,7 @@ namespace Perugini_WPF_Doctores.Clases
             return int.Parse(id_DR[0].ToString());
         }
 
-        public void borrarPersona(int id, bool doc_paciente) // doc_paciente - True doc.
+        public static void borrarPersona(int id, bool doc_paciente) // doc_paciente - True doc.
         {
             conexionSQL = new SqlConnection(conexion);
 
@@ -156,7 +152,7 @@ namespace Perugini_WPF_Doctores.Clases
         #endregion
 
         #region turnos
-        public void nuevoTurno(int id_paciente, int id_doctor, DateTime horarioInicio,
+        public static void nuevoTurno(int id_paciente, int id_doctor, DateTime horarioInicio,
             int duracion, int tipoDeTurno, string comentariosPaciente)
         {
             conexionSQL = new SqlConnection(conexion);
@@ -179,7 +175,7 @@ namespace Perugini_WPF_Doctores.Clases
             conexionSQL.Close();
         }
 
-        public DataTable mostrarMisTurnos(int id, bool doc_paciente) // doc_paciente - True doc.
+        public static DataTable mostrarMisTurnos(int id, bool doc_paciente) // doc_paciente - True doc.
         {
             actualizarTurnosPasados();
 
@@ -213,7 +209,7 @@ namespace Perugini_WPF_Doctores.Clases
             return turnos;
         }
 
-        private void actualizarTurnosPasados()
+        private static void actualizarTurnosPasados()
         {
             conexionSQL = new SqlConnection(conexion);
 
@@ -226,7 +222,7 @@ namespace Perugini_WPF_Doctores.Clases
             conexionSQL.Close();
         }
 
-        public void confirmarTurno(int id, string comentariosDoc, int id_estado)
+        public static void confirmarTurno(int id, string comentariosDoc, int id_estado)
         {
             conexionSQL = new SqlConnection(conexion);
 
@@ -244,7 +240,7 @@ namespace Perugini_WPF_Doctores.Clases
             conexionSQL.Close();
         }
 
-        public void borrarTurno(int id)
+        public static void borrarTurno(int id)
         {
             conexionSQL = new SqlConnection(conexion);
 
@@ -262,7 +258,7 @@ namespace Perugini_WPF_Doctores.Clases
 
         #region recetas
 
-        public void nuevaReceta(int id_paciente, int id_doctor, int id_medicacion, string frecuencia, string comentarios)
+        public static void nuevaReceta(int id_paciente, int id_doctor, int id_medicacion, string frecuencia, string comentarios)
         {
             conexionSQL = new SqlConnection(conexion);
 
@@ -280,7 +276,7 @@ namespace Perugini_WPF_Doctores.Clases
             conexionSQL.Close();
         }
 
-        public DataTable mostrarRecetas(int id, bool doc_paciente) // doc_paciente - True doc.
+        public static DataTable mostrarRecetas(int id, bool doc_paciente) // doc_paciente - True doc.
         {
             conexionSQL = new SqlConnection(conexion);
             string consulta;
@@ -310,7 +306,7 @@ namespace Perugini_WPF_Doctores.Clases
             return recetas;
         }
 
-        public void borrarReceta(int id)
+        public static void borrarReceta(int id)
         {
             conexionSQL = new SqlConnection(conexion);
 
@@ -327,7 +323,7 @@ namespace Perugini_WPF_Doctores.Clases
         #endregion
 
         #region medicaciones
-        public void nuevaMedicacion(string nombre, float dosis)
+        public static void nuevaMedicacion(string nombre, float dosis)
         {
             conexionSQL = new SqlConnection(conexion);
 
@@ -341,7 +337,7 @@ namespace Perugini_WPF_Doctores.Clases
             comando_crearMedicacion.ExecuteNonQuery();
             conexionSQL.Close();
         }
-        public DataTable mostrarMedicaciones()
+        public static DataTable mostrarMedicaciones()
         {
             conexionSQL = new SqlConnection(conexion);
             string consulta = "spTodasLasMedicaciones";
@@ -356,7 +352,7 @@ namespace Perugini_WPF_Doctores.Clases
             return medicaciones;
         }
 
-        public void actualizarMedicacion(int id, string nombre, float dosis)
+        public static void actualizarMedicacion(int id, string nombre, float dosis)
         {
             conexionSQL = new SqlConnection(conexion);
 
@@ -372,7 +368,7 @@ namespace Perugini_WPF_Doctores.Clases
             conexionSQL.Close();
         }
 
-        public void borrarMedicacion(int id)
+        public static void borrarMedicacion(int id)
         {
             conexionSQL = new SqlConnection(conexion);
 
@@ -390,7 +386,7 @@ namespace Perugini_WPF_Doctores.Clases
 
         #region ComboBoxes
 
-        public DataTable comboBoxPacientes()
+        public static DataTable comboBoxPacientes()
         {
             conexionSQL = new SqlConnection(conexion);
             string consulta = "spPacientes";
@@ -405,7 +401,7 @@ namespace Perugini_WPF_Doctores.Clases
             return pacientes;
         }
 
-        public DataTable comboBoxDoctores()
+        public static DataTable comboBoxDoctores()
         {
             conexionSQL = new SqlConnection(conexion);
             string consulta = "spDoctores";
@@ -420,7 +416,7 @@ namespace Perugini_WPF_Doctores.Clases
             return doctores;
         }
 
-        public DataTable comboBoxTipoDeTurno()
+        public static DataTable comboBoxTipoDeTurno()
         {
             conexionSQL = new SqlConnection(conexion);
             string consulta = "spTiposDeTurnos";
@@ -435,7 +431,7 @@ namespace Perugini_WPF_Doctores.Clases
             return tiposDeTurnos;
         }
 
-        public DataTable comboBoxMedicaciones()
+        public static DataTable comboBoxMedicaciones()
         {
             conexionSQL = new SqlConnection(conexion);
             string consulta = "spMedicaciones";

@@ -9,14 +9,12 @@ namespace Perugini_WPF_Doctores.Paginas.Doctores
     public partial class Nueva_Receta : Page
     {
         int Id_Doctor;
-        Conector conector;
         VistaDoctores vistaDoctores;
 
-        public Nueva_Receta(int Id_Doc, Conector conector, VistaDoctores vistaDoctores)
+        public Nueva_Receta(int Id_Doc, VistaDoctores vistaDoctores)
         {
             InitializeComponent();
 
-            this.conector = conector;
             Id_Doctor = Id_Doc;
             this.vistaDoctores = vistaDoctores;
 
@@ -27,12 +25,12 @@ namespace Perugini_WPF_Doctores.Paginas.Doctores
         {
             box_paciente.DisplayMemberPath = "Nombre";
             box_paciente.SelectedValue = "Id";
-            DataTable pacientes = conector.comboBoxPacientes();
+            DataTable pacientes = Conector.comboBoxPacientes();
             box_paciente.ItemsSource = pacientes.DefaultView;
 
             box_medicacion.DisplayMemberPath = "NombreYDosis";
             box_medicacion.SelectedValue = "Id";
-            DataTable medicaciones = conector.comboBoxMedicaciones();
+            DataTable medicaciones = Conector.comboBoxMedicaciones();
             box_medicacion.ItemsSource = medicaciones.DefaultView;
         }
 
@@ -41,20 +39,21 @@ namespace Perugini_WPF_Doctores.Paginas.Doctores
             string frecuencia = box_frecuencia.Text;
             string comentarios = box_comentarios.Text;
 
-            if (frecuencia == "" || comentarios == "" || box_paciente.SelectedItem == null || box_medicacion.SelectedItem == null)
-                MessageBox.Show("Uno o más campos no pueden estar vacíos, por favor completelos. Muchas gracias", "Error al guardar", MessageBoxButton.OK, MessageBoxImage.Error);
-            else
-            {
-                DataRowView pacienteDRV = (DataRowView)box_paciente.SelectionBoxItem;
-                int paciente = int.Parse(pacienteDRV.Row[0].ToString());
-                DataRowView medicacionDRV = (DataRowView)box_medicacion.SelectionBoxItem;
-                int medicacion = int.Parse(medicacionDRV.Row[0].ToString());
+            if (!Verificador.verificarStringLargo(frecuencia))
+                return;
 
-                conector.nuevaReceta(paciente, Id_Doctor, medicacion, frecuencia, comentarios);
+            if (!Verificador.verificarStringLargo(comentarios))
+                return;
 
-                MessageBox.Show($"La receta se creó correctamente.", "La receta se creó correctamente", MessageBoxButton.OK, MessageBoxImage.Information);
-                vistaDoctores.irARecetas();
-            }
+            DataRowView pacienteDRV = (DataRowView)box_paciente.SelectionBoxItem;
+            int paciente = int.Parse(pacienteDRV.Row[0].ToString());
+            DataRowView medicacionDRV = (DataRowView)box_medicacion.SelectionBoxItem;
+            int medicacion = int.Parse(medicacionDRV.Row[0].ToString());
+
+            Conector.nuevaReceta(paciente, Id_Doctor, medicacion, frecuencia, comentarios);
+
+            MessageBox.Show($"La receta se creó correctamente.", "La receta se creó correctamente", MessageBoxButton.OK, MessageBoxImage.Information);
+            vistaDoctores.irARecetas();
         }
     }
 }

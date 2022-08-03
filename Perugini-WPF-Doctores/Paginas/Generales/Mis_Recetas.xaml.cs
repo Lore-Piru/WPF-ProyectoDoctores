@@ -7,15 +7,13 @@ namespace Perugini_WPF_Doctores.Paginas.Generales
 {
     public partial class Mis_Recetas : Page
     {
-        Conector conector;
         int id;
         bool doc_paciente;
 
-        public Mis_Recetas(int id, Conector conector, bool doc_paciente) // doc_paciente - True doc.
+        public Mis_Recetas(int id, bool doc_paciente) // doc_paciente - True doc.
         {
             InitializeComponent();
 
-            this.conector = conector;
             this.id = id;
             this.doc_paciente = doc_paciente;
 
@@ -24,14 +22,14 @@ namespace Perugini_WPF_Doctores.Paginas.Generales
 
         public void recargarRecetas()
         {
-            DataTable recetasTabla = conector.mostrarRecetas(id, doc_paciente);
+            DataTable recetasTabla = Conector.mostrarRecetas(id, doc_paciente);
             grid_recetas.SelectedValuePath = "Id";
             grid_recetas.ItemsSource = recetasTabla.DefaultView;
         }
 
         private void Boton_Borrar_Receta_Click(object sender, RoutedEventArgs e)
         {
-            conector.borrarReceta((int)grid_recetas.SelectedValue);
+            Conector.borrarReceta((int)grid_recetas.SelectedValue);
             recargarRecetas();
         }
     }

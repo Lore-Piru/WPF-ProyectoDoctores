@@ -8,14 +8,12 @@ namespace Perugini_WPF_Doctores.Paginas.Generales
     public partial class Registro : Page
     {
         MainWindow mainWindow = null;
-        Conector conector;
 
-        public Registro(MainWindow mainWindow, Conector conector)
+        public Registro(MainWindow mainWindow)
         {
             InitializeComponent();
 
             this.mainWindow = mainWindow;
-            this.conector = conector;
         }
 
         private void Boton_Doctor_Click(object sender, RoutedEventArgs e)
@@ -32,31 +30,32 @@ namespace Perugini_WPF_Doctores.Paginas.Generales
         {
             string nombre = box_nombre.Text;
             string apellido = box_apellido.Text;
+
+            List<string> stringsCortos = new List<string>() { nombre, apellido };
+
             string nombreDeUsuario = box_nombreDeUsuario.Text;
             string clave = box_clave.Password;
-            string nroDeDoc_string = box_nroDeDoc.Text;
 
-            if (nombre == "" || apellido == "" || nombreDeUsuario == "" || clave == "" || nroDeDoc_string == "")
-                MessageBox.Show("Uno o más campos no pueden estar vacíos, por favor completelos. Muchas gracias", "Error al guardar", MessageBoxButton.OK, MessageBoxImage.Error);
+            int tipoDeDoc = box_tipoDeDocumento.SelectedIndex;
+            string nroDeDoc = box_nroDeDoc.Text.ToUpper();
+
+            if (!(Verificador.verificarStringsCortos(stringsCortos)
+                && Verificador.verificarCredenciales(nombreDeUsuario, clave)
+                && Verificador.verificarDocumentos(tipoDeDoc, nroDeDoc)))
+                return;
+
+            List<string> datos = new List<string>() { nombre, apellido, nombreDeUsuario, clave };
+            Conector.nuevaPersona(datos, tipoDeDoc, nroDeDoc, doc_paciente);
+
+            if (doc_paciente)
+                mainWindow.uiDoctores(Conector.login(nombreDeUsuario, clave, doc_paciente));
             else
-            {
-                int nroDeDoc;
-                if (int.TryParse(nroDeDoc_string, out nroDeDoc))
-                {
-                    int tipoDeDoc = box_tipoDeDocumento.SelectedIndex;
+                mainWindow.uiPacientes(Conector.login(nombreDeUsuario, clave, doc_paciente));
+        }
 
-                    List<string> datos = new List<string>() { nombre, apellido, nombreDeUsuario, clave };
-
-                    conector.nuevaPersona(datos, tipoDeDoc, nroDeDoc, doc_paciente);
-
-                    if (doc_paciente)
-                        mainWindow.uiDoctores(conector.login(nombreDeUsuario, clave, doc_paciente));
-                    else
-                        mainWindow.uiPacientes(conector.login(nombreDeUsuario, clave, doc_paciente));
-                }
-                else
-                    MessageBox.Show("El número de documento es incorrecto, por favor cambielo. Muchas gracias", "Error en el número de documento", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+        private void Boton_Atras_Click(object sender, RoutedEventArgs e)
+        {
+            mainWindow.volverAlLogin();
         }
     }
 }

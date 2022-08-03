@@ -27,7 +27,7 @@
 
         <TextBlock Grid.Row="0" Grid.ColumnSpan="5" x:Name="Texto_Inicial" TextWrapping="Wrap" Text="Mis Recetas" FontFamily="Cooper Black" FontSize="50" TextAlignment="Center" VerticalAlignment="Top" Height="58"/>
 
-        <DataGrid Name="grid_recetas" Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="2" d:ItemsSource="{d:SampleData ItemCount=1}" Background="#FFF7D4F5" RowBackground="#FFF979F2" AlternatingRowBackground="#FFF7D4F5" CanUserAddRows="False" CanUserResizeColumns="True" ColumnWidth="*"/>
+        <DataGrid Name="grid_recetas" Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="2" d:ItemsSource="{d:SampleData ItemCount=1}" Background="#FFF7D4F5" RowBackground="#FFF979F2" AlternatingRowBackground="#FFF7D4F5" CanUserAddRows="False" CanUserResizeColumns="True" ColumnWidth="*" IsReadOnly="True"/>
 
         <Button  Grid.Column="2" Grid.Row="4" x:Name="Boton_Borrar_Receta" Content="Borrar receta" HorizontalAlignment="Center" Background="#F6A2D7" FontFamily="Cooper Black" FontSize="25" RenderTransformOrigin="1,0" Margin="0,2,0,10" Width="314" Click="Boton_Borrar_Receta_Click"/>
 

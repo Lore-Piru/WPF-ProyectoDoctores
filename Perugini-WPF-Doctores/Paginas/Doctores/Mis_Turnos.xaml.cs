@@ -8,28 +8,26 @@ namespace Perugini_WPF_Doctores.Paginas.Doctores
     public partial class Mis_Turnos : Page
     {
         int Id_Doctor;
-        Conector conector;
 
-        public Mis_Turnos(int Id_Doc, Conector conector)
+        public Mis_Turnos(int Id_Doc)
         {
             InitializeComponent();
 
             Id_Doctor = Id_Doc;
-            this.conector = conector;
 
             cargarTurnos();
         }
 
         private void cargarTurnos()
         {
-            DataTable turnosTabla = conector.mostrarMisTurnos(Id_Doctor, true);
+            DataTable turnosTabla = Conector.mostrarMisTurnos(Id_Doctor, true);
             grid_turnos.SelectedValuePath = "Id";
             grid_turnos.ItemsSource = turnosTabla.DefaultView;
         }
 
         private void Boton_Eliminar_Turno_Click(object sender, RoutedEventArgs e)
         {
-            conector.borrarTurno((int)grid_turnos.SelectedValue);
+            Conector.borrarTurno((int)grid_turnos.SelectedValue);
             cargarTurnos();
         }
 
@@ -38,7 +36,10 @@ namespace Perugini_WPF_Doctores.Paginas.Doctores
             DataRowView turnosDRV = (DataRowView)grid_turnos.SelectedItems[0];
             string comentarios = turnosDRV.Row[7].ToString();
 
-            conector.confirmarTurno((int)grid_turnos.SelectedValue, comentarios, 1);
+            if (!Verificador.verificarStringLargo(comentarios))
+                return;
+
+            Conector.confirmarTurno((int)grid_turnos.SelectedValue, comentarios, 1);
             cargarTurnos();
         }
 
@@ -47,7 +48,10 @@ namespace Perugini_WPF_Doctores.Paginas.Doctores
             DataRowView turnosDRV = (DataRowView)grid_turnos.SelectedItems[0];
             string comentarios = turnosDRV.Row[7].ToString();
 
-            conector.confirmarTurno((int)grid_turnos.SelectedValue, comentarios, 1);
+            if (!Verificador.verificarStringLargo(comentarios))
+                return;
+
+            Conector.confirmarTurno((int)grid_turnos.SelectedValue, comentarios, 2);
             cargarTurnos();
         }
     }

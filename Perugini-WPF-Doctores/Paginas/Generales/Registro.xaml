@@ -26,7 +26,7 @@
                 <RowDefinition Height="0.15*"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="0.15*"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="0.5*"></RowDefinition>
                 <RowDefinition Height="0.15*"></RowDefinition>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -59,8 +59,27 @@
             <TextBlock Grid.Row="5" Grid.Column="3" x:Name="Texto_Nro_Doc" TextWrapping="Wrap" Text="Nro de documento:" FontFamily="Cooper Black" FontSize="30" TextAlignment="Center" VerticalAlignment="Top" Height="39" Grid.ColumnSpan="2" Margin="0,10,69,0"/>
             <TextBox x:Name="box_nroDeDoc" Grid.Column="3" HorizontalAlignment="Center" Grid.Row="5" TextWrapping="Wrap" VerticalAlignment="Top" Width="288" Height="52" Margin="0,54,0,0" FontFamily="Cooper Black" FontSize="25" Background="#FFF7D4F5"/>
 
-            <Button  Grid.Column="1" Grid.Row="7" x:Name="Boton_Doctor" Content="Como doctor" HorizontalAlignment="Center" Background="#F6A2D7" FontFamily="Cooper Black" FontSize="25" RenderTransformOrigin="1,0" Width="229" Click="Boton_Doctor_Click"/>
-            <Button  Grid.Column="3" Grid.Row="7" x:Name="Boton_Paciente" Content="Como paciente" HorizontalAlignment="Center" Background="#F6A2D7" FontFamily="Cooper Black" FontSize="25" RenderTransformOrigin="1,0" Width="229" Click="Boton_Paciente_Click"/>
+            <Grid Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="3">
+                
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                
+                <Button  Grid.Column="1" Grid.Row="0" x:Name="Boton_Doctor" Content="Como doctor" HorizontalAlignment="Center" Background="#F6A2D7" FontFamily="Cooper Black" FontSize="25" RenderTransformOrigin="1,0" Width="229" Click="Boton_Doctor_Click"/>
+                <Button  Grid.Column="3" Grid.Row="0" x:Name="Boton_Paciente" Content="Como paciente" HorizontalAlignment="Center" Background="#F6A2D7" FontFamily="Cooper Black" FontSize="25" RenderTransformOrigin="1,0" Width="229" Click="Boton_Paciente_Click"/>
+                <Button  Grid.Column="5" Grid.Row="0" x:Name="Boton_Atras" Content="Volver al login" HorizontalAlignment="Center" Background="#F6A2D7" FontFamily="Cooper Black" FontSize="25" RenderTransformOrigin="1,0" Width="229" Click="Boton_Atras_Click"/>
+                
+            </Grid>
         </Grid>
     </Grid>
 </Page>

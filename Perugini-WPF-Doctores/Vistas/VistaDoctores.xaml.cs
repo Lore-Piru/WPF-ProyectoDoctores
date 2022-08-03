@@ -1,5 +1,4 @@
-﻿using Perugini_WPF_Doctores.Clases;
-using Perugini_WPF_Doctores.Paginas.Doctores;
+﻿using Perugini_WPF_Doctores.Paginas.Doctores;
 using Perugini_WPF_Doctores.Paginas.Generales;
 using System.Windows;
 using System.Windows.Controls;
@@ -10,7 +9,6 @@ namespace Perugini_WPF_Doctores.Vistas
     {
         int Id_Doctor;
         MainWindow mainWindow = null;
-        Conector conector;
 
         Mis_Turnos mis_turnos;
         Mis_Recetas mis_Recetas;
@@ -19,19 +17,17 @@ namespace Perugini_WPF_Doctores.Vistas
         Nueva_Medicacion nueva_Medicacion;
         EditarUsuario editar_Usuario;
 
-        public VistaDoctores(int Id_Doc, MainWindow mainWindow, Conector conector)
+        public VistaDoctores(int Id_Doc, MainWindow mainWindow)
         {
             Id_Doctor = Id_Doc;
             this.mainWindow = mainWindow;
 
-            this.conector = conector;
-
-            nueva_Receta = new Nueva_Receta(Id_Doctor, this.conector, this);
-            medicaciones = new Medicaciones(this.conector);
-            nueva_Medicacion = new Nueva_Medicacion(this.conector, this);
-            mis_turnos = new Mis_Turnos(Id_Doctor, this.conector);
-            mis_Recetas = new Mis_Recetas(Id_Doctor, this.conector, true);
-            editar_Usuario = new EditarUsuario(Id_Doctor, this.conector, this.mainWindow, true);
+            nueva_Receta = new Nueva_Receta(Id_Doctor, this);
+            medicaciones = new Medicaciones();
+            nueva_Medicacion = new Nueva_Medicacion(this);
+            mis_turnos = new Mis_Turnos(Id_Doctor);
+            mis_Recetas = new Mis_Recetas(Id_Doctor, true);
+            editar_Usuario = new EditarUsuario(Id_Doctor, this.mainWindow, true);
 
             InitializeComponent();
             Frame_VistaDoctores.Navigate(mis_turnos);
@@ -44,8 +40,8 @@ namespace Perugini_WPF_Doctores.Vistas
 
         internal void irARecetas()
         {
-            Frame_VistaDoctores.Navigate(mis_Recetas);
             mis_Recetas.recargarRecetas();
+            Frame_VistaDoctores.Navigate(mis_Recetas);
         }
 
         private void Boton_Mis_Recetas_Click(object sender, RoutedEventArgs e)
